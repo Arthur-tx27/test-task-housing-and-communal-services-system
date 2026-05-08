@@ -1,6 +1,19 @@
 import { observer } from 'mobx-react-lite';
 import { useRootStore } from '@/shared/lib/hooks/useRootStore';
 import { DeleteButton } from '@/features/delete-meter/ui/DeleteButton';
+import {
+  TableWrapper,
+  ScrollContainer,
+  StyledTable,
+  Thead,
+  Th,
+  Tr,
+  Td,
+  TypeCell,
+  TypeContent,
+  TypeIcon,
+  ActionsCell,
+} from './MetersTable.styles';
 
 const COLUMNS = [
   '№',
@@ -33,45 +46,49 @@ export const MetersTable = observer(function MetersTable() {
   const { areasMap } = store.areasStore;
 
   return (
-    <table>
-      <thead>
-        <tr>
-          {COLUMNS.map((col) => (
-            <th key={col}>{col}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {meters.map((meter, index) => {
-          const area = areasMap.get(meter.areaId);
-          const address = area
-            ? `${area.house}, кв. ${area.apartment}`
-            : '';
-
-          return (
-            <tr key={meter.id}>
-              <td>{index + 1 + offset}</td>
-              <td>
-                <img
-                  src={TYPE_ICONS[meter._type] ?? ''}
-                  alt=""
-                  width={16}
-                  height={16}
-                />
-                {TYPE_LABELS[meter._type] ?? meter._type}
-              </td>
-              <td>{formatDate(meter.installation_date)}</td>
-              <td>{meter.is_automatic ? 'Да' : 'Нет'}</td>
-              <td>{meter.initial_values[0]}</td>
-              <td>{address}</td>
-              <td>{meter.description}</td>
-              <td>
-                <DeleteButton meterId={meter.id} />
-              </td>
+    <TableWrapper>
+      <ScrollContainer>
+        <StyledTable>
+          <Thead>
+            <tr>
+              {COLUMNS.map((col) => (
+                <Th key={col}>{col}</Th>
+              ))}
             </tr>
-          );
-        })}
-      </tbody>
-    </table>
+          </Thead>
+          <tbody>
+            {meters.map((meter, index) => {
+              const area = areasMap.get(meter.areaId);
+              const address = area
+                ? `${area.house}, кв. ${area.apartment}`
+                : '';
+
+              return (
+                <Tr key={meter.id}>
+                  <Td>{index + 1 + offset}</Td>
+                  <TypeCell>
+                    <TypeContent>
+                      <TypeIcon
+                        src={TYPE_ICONS[meter._type] ?? ''}
+                        alt=""
+                      />
+                      {TYPE_LABELS[meter._type] ?? meter._type}
+                    </TypeContent>
+                  </TypeCell>
+                  <Td>{formatDate(meter.installation_date)}</Td>
+                  <Td>{meter.is_automatic ? 'Да' : 'Нет'}</Td>
+                  <Td>{meter.initial_values[0]}</Td>
+                  <Td>{address}</Td>
+                  <Td>{meter.description}</Td>
+                  <ActionsCell>
+                    <DeleteButton meterId={meter.id} />
+                  </ActionsCell>
+                </Tr>
+              );
+            })}
+          </tbody>
+        </StyledTable>
+      </ScrollContainer>
+    </TableWrapper>
   );
 });

@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { useRootStore } from '@/shared/lib/hooks/useRootStore';
 import { MetersTable } from '@/widgets/meters-table/ui/MetersTable';
 import { Pagination } from '@/features/pagination/ui/Pagination';
+import { PageContainer, PageTitle } from './MetersListPage.styles';
 
 export const MetersListPage = observer(function MetersListPage() {
   const store = useRootStore();
@@ -12,10 +13,10 @@ export const MetersListPage = observer(function MetersListPage() {
   }, [store]);
 
   return (
-    <div>
-      <h1>Список счётчиков</h1>
+    <PageContainer>
+      <PageTitle>Список счётчиков</PageTitle>
       <MetersTable />
       <Pagination />
-    </div>
+    </PageContainer>
   );
 });
