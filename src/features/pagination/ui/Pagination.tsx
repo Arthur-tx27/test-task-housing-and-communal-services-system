@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useRootStore } from '@/shared/lib/hooks/useRootStore';
+import { PaginationContainer, PageButton, Ellipsis } from './Pagination.styles';
 
 const PAGE_SIZE = 20;
 
@@ -46,22 +47,22 @@ export const Pagination = observer(function Pagination() {
   if (totalPages <= 1) return null;
 
   return (
-    <div>
+    <PaginationContainer>
       {pageNumbers.map((item, index) =>
         item === 'ellipsis' ? (
-          <span key={`ellipsis-${index}`}>...</span>
+          <Ellipsis key={`ellipsis-${index}`}>...</Ellipsis>
         ) : (
-          <button
+          <PageButton
             key={item}
             type="button"
+            $active={item === currentPage}
             disabled={isLoading}
             onClick={() => goToPage(item)}
-            style={{ fontWeight: item === currentPage ? 'bold' : 'normal' }}
           >
             {item}
-          </button>
+          </PageButton>
         )
       )}
-    </div>
+    </PaginationContainer>
   );
 });
