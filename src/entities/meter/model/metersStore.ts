@@ -18,6 +18,7 @@ export const MetersStore = types
     meters: types.array(MeterModel),
     isLoading: false,
     offset: 0,
+    totalCount: 0,
     error: types.maybeNull(types.string),
   })
   .actions((self) => {
@@ -42,6 +43,7 @@ export const MetersStore = types
           const response = await fetchMeters(20, self.offset);
           runInAction(() => {
             self.meters.clear();
+            self.totalCount = response.count;
             response.results.forEach((dto) => {
               self.meters.push(createMeterFromDto(dto));
             });
@@ -107,6 +109,7 @@ export const MetersStore = types
       clear() {
         self.meters.clear();
         self.offset = 0;
+        self.totalCount = 0;
         self.error = null;
         self.isLoading = false;
       },
