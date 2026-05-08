@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useRootStore } from '@/shared/lib/hooks/useRootStore';
+import { DeleteButton } from '@/features/delete-meter/ui/DeleteButton';
 
 const COLUMNS = [
   '№',
@@ -64,7 +65,9 @@ export const MetersTable = observer(function MetersTable() {
               <td>{meter.initial_values[0]}</td>
               <td>{address}</td>
               <td>{meter.description}</td>
-              <td />
+              <td>
+                <DeleteButton meterId={meter.id} />
+              </td>
             </tr>
           );
         })}
