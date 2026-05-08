@@ -1,5 +1,12 @@
+import { StoreProvider } from '@/app/providers/StoreProvider';
+import { MetersListPage } from '@/pages/meters-list/ui/MetersListPage';
+
 function App() {
-  return <div>Список счётчиков</div>;
+  return (
+    <StoreProvider>
+      <MetersListPage />
+    </StoreProvider>
+  );
 }
 
 export default App;
