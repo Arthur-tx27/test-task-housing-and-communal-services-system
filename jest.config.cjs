@@ -1,16 +1,19 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
-export default {
+module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
-  setupFiles: ['<rootDir>/src/shared/lib/test/setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/shared/lib/test/setup.ts'],
   transform: {
     '^.+\\.tsx?$': [
       'ts-jest',
       {
-        tsconfig: 'tsconfig.app.json',
+        tsconfig: 'tsconfig.test.json',
+        diagnostics: {
+          ignoreCodes: [1343],
+        },
       },
     ],
   },
