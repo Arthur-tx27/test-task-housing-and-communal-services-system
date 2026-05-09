@@ -18,7 +18,7 @@ export const GlobalStyles = createGlobalStyle`
     font-family: ${({ theme }) => theme.fonts.primary};
     font-size: ${({ theme }) => theme.fonts.sizeSm};
     color: ${({ theme }) => theme.colors.textPrimary};
-    background-color: ${({ theme }) => theme.colors.background};
+    background-color: ${({ theme }) => theme.colors.backgroundMain};
     line-height: 1.4;
   }
 

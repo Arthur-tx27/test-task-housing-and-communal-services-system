@@ -12,10 +12,17 @@ export default defineConfig(({ mode }) => {
         '@': path.resolve(__dirname, 'src'),
       },
     },
+      server: {
+      proxy: {
+        '/api': {
+          target: env.VITE_API_TARGET,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
+    },
     define: {
-      'process.env.SHOWROOM_API_URL': JSON.stringify(
-        env.SHOWROOM_API_URL
-      ),
+      'process.env.SHOWROOM_API_URL': JSON.stringify('/api'),
     },
   };
 });
