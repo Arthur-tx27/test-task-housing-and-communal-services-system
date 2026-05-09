@@ -22,7 +22,7 @@ describe('API client', () => {
       const mockResponse = { results: [{ id: '1' }], count: 1 };
       global.fetch = jest.fn().mockResolvedValue({
         ok: true,
-        json: () => Promise.resolve(mockResponse),
+        text: () => Promise.resolve(JSON.stringify(mockResponse)),
       });
 
       const result = await get('/meters/');
@@ -36,7 +36,7 @@ describe('API client', () => {
     it('добавляет query-параметры к URL', async () => {
       global.fetch = jest.fn().mockResolvedValue({
         ok: true,
-        json: () => Promise.resolve({}),
+        text: () => Promise.resolve('{}'),
       });
 
       await get('/meters/', { limit: '20', offset: '0' });
@@ -45,6 +45,20 @@ describe('API client', () => {
       expect(url).toContain(`${TEST_URL}/meters/?`);
       expect(url).toContain('limit=20');
       expect(url).toContain('offset=0');
+    });
+
+    it('добавляет массив значений как несколько одноимённых query-параметров', async () => {
+      global.fetch = jest.fn().mockResolvedValue({
+        ok: true,
+        text: () => Promise.resolve('{}'),
+      });
+
+      await get('/areas/', { id__in: ['a', 'b', 'c'] });
+
+      const url = (global.fetch as jest.Mock).mock.calls[0][0] as string;
+      expect(url).toContain('id__in=a');
+      expect(url).toContain('id__in=b');
+      expect(url).toContain('id__in=c');
     });
 
     it('выбрасывает ApiError при HTTP-ошибке', async () => {
@@ -72,7 +86,7 @@ describe('API client', () => {
     it('выполняет DELETE-запрос', async () => {
       global.fetch = jest.fn().mockResolvedValue({
         ok: true,
-        json: () => Promise.resolve(null),
+        text: () => Promise.resolve(''),
       });
 
       await del('/meters/123/');
