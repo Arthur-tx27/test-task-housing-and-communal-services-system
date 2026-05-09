@@ -7,6 +7,29 @@ export const TableWrapper = styled.div`
   overflow: hidden;
 `;
 
+export const FilterBar = styled.div`
+  display: flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 ${({ theme }) => theme.spacing.lg};
+  background: ${({ theme }) => theme.colors.surfaceHeader};
+  font-size: ${({ theme }) => theme.fonts.sizeSm};
+  color: ${({ theme }) => theme.colors.textSecondary};
+
+  & > span:first-child {
+    padding-left: ${({ theme }) => theme.spacing.xl};
+  }
+`;
+
+export const FilterLabel = styled.span<{ $width?: string }>`
+  flex: ${({ $width }) => ($width ? 'none' : '1')};
+  width: ${({ $width }) => $width || 'auto'};
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
 export const ScrollContainer = styled.div`
   overflow-y: auto;
 `;
@@ -25,8 +48,9 @@ export const Thead = styled.thead`
   }
 `;
 
-export const Th = styled.th`
+export const Th = styled.th<{ $width?: string }>`
   height: ${({ theme }) => theme.table.headerHeight};
+  width: ${({ $width }) => $width || 'auto'};
   padding: 0 ${({ theme }) => theme.spacing.lg};
   font-size: ${({ theme }) => theme.fonts.sizeSm};
   font-weight: 500;
@@ -59,8 +83,9 @@ export const Tr = styled.tr`
   }
 `;
 
-export const Td = styled.td`
+export const Td = styled.td<{ $width?: string }>`
   height: ${({ theme }) => theme.table.rowHeight};
+  width: ${({ $width }) => $width || 'auto'};
   padding: 0 ${({ theme }) => theme.spacing.lg};
   font-size: ${({ theme }) => theme.fonts.sizeSm};
   color: ${({ theme }) => theme.colors.textPrimary};
