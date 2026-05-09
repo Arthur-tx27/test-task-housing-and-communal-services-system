@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.SHOWROOM_API_URL as string;
+const BASE_URL = process.env.SHOWROOM_API_URL ?? '';
 
 export class ApiError extends Error {
   status: number;

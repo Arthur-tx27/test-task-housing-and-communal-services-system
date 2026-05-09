@@ -22,7 +22,7 @@ const Spinner = styled.div`
 
 export function Loader() {
   return (
-    <Container>
+    <Container data-testid="loader">
       <Spinner />
     </Container>
   );

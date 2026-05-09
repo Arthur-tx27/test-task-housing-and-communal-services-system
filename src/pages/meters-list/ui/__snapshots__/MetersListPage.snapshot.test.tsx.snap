@@ -1,0 +1,257 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Снапшот-тесты снапшот MetersListPage с мок-стором 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-dmlpFL keMmHL"
+  >
+    <h1
+      class="sc-kfzzyY kPzbgc"
+    >
+      Список счётчиков
+    </h1>
+    <div
+      class="sc-jrAIFA hgZOzc"
+    >
+      <div
+        class="sc-kEjckD lkRIFz"
+      >
+        <table
+          class="sc-iqHZue QxoqC"
+        >
+          <thead
+            class="sc-crrrsl ihoEje"
+          >
+            <tr>
+              <th
+                class="sc-dQoBM btvwyT"
+              >
+                №
+              </th>
+              <th
+                class="sc-dQoBM btvwyT"
+              >
+                Тип
+              </th>
+              <th
+                class="sc-dQoBM btvwyT"
+              >
+                Дата установки
+              </th>
+              <th
+                class="sc-dQoBM btvwyT"
+              >
+                Автоматический
+              </th>
+              <th
+                class="sc-dQoBM btvwyT"
+              >
+                Текущие показания
+              </th>
+              <th
+                class="sc-dQoBM btvwyT"
+              >
+                Адрес
+              </th>
+              <th
+                class="sc-dQoBM btvwyT"
+              >
+                Примечание
+              </th>
+              <th
+                class="sc-dQoBM btvwyT"
+              />
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="sc-bqyIgP eQfPzV"
+            >
+              <td
+                class="sc-kstoPm RzqPO"
+              >
+                1
+              </td>
+              <td
+                class="sc-kstoPm sc-hBFaCF RzqPO"
+              >
+                <span
+                  class="sc-fodXMg feMeWx"
+                >
+                  <img
+                    alt=""
+                    class="sc-fFubTW iTsTAW"
+                    src="/icons/hvs.svg"
+                  />
+                  ХВС
+                </span>
+              </td>
+              <td
+                class="sc-kstoPm RzqPO"
+              >
+                01.01.2024
+              </td>
+              <td
+                class="sc-kstoPm RzqPO"
+              >
+                Нет
+              </td>
+              <td
+                class="sc-kstoPm RzqPO"
+              >
+                0
+              </td>
+              <td
+                class="sc-kstoPm RzqPO"
+              >
+                ул. Тестовая, 1, кв. 1
+              </td>
+              <td
+                class="sc-kstoPm RzqPO"
+              />
+              <td
+                class="sc-kstoPm sc-bkAakD RzqPO eOzbqq"
+              >
+                <button
+                  class="sc-bdfDLd fZIEJZ delete-button"
+                  disabled=""
+                  type="button"
+                >
+                  <img
+                    alt="Удалить"
+                    class="sc-gsTDHW hJCXVh"
+                    src="/icons/trash.svg"
+                  />
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Снапшот-тесты снапшот MetersTable с тестовыми данными 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-jrAIFA hgZOzc"
+  >
+    <div
+      class="sc-kEjckD lkRIFz"
+    >
+      <table
+        class="sc-iqHZue QxoqC"
+      >
+        <thead
+          class="sc-crrrsl ihoEje"
+        >
+          <tr>
+            <th
+              class="sc-dQoBM btvwyT"
+            >
+              №
+            </th>
+            <th
+              class="sc-dQoBM btvwyT"
+            >
+              Тип
+            </th>
+            <th
+              class="sc-dQoBM btvwyT"
+            >
+              Дата установки
+            </th>
+            <th
+              class="sc-dQoBM btvwyT"
+            >
+              Автоматический
+            </th>
+            <th
+              class="sc-dQoBM btvwyT"
+            >
+              Текущие показания
+            </th>
+            <th
+              class="sc-dQoBM btvwyT"
+            >
+              Адрес
+            </th>
+            <th
+              class="sc-dQoBM btvwyT"
+            >
+              Примечание
+            </th>
+            <th
+              class="sc-dQoBM btvwyT"
+            />
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            class="sc-bqyIgP eQfPzV"
+          >
+            <td
+              class="sc-kstoPm RzqPO"
+            >
+              1
+            </td>
+            <td
+              class="sc-kstoPm sc-hBFaCF RzqPO"
+            >
+              <span
+                class="sc-fodXMg feMeWx"
+              >
+                <img
+                  alt=""
+                  class="sc-fFubTW iTsTAW"
+                  src="/icons/hvs.svg"
+                />
+                ХВС
+              </span>
+            </td>
+            <td
+              class="sc-kstoPm RzqPO"
+            >
+              10.05.2024
+            </td>
+            <td
+              class="sc-kstoPm RzqPO"
+            >
+              Да
+            </td>
+            <td
+              class="sc-kstoPm RzqPO"
+            >
+              100
+            </td>
+            <td
+              class="sc-kstoPm RzqPO"
+            >
+              ул. Мира, 5, кв. 12
+            </td>
+            <td
+              class="sc-kstoPm RzqPO"
+            />
+            <td
+              class="sc-kstoPm sc-bkAakD RzqPO eOzbqq"
+            >
+              <button
+                class="sc-bdfDLd fZIEJZ delete-button"
+                type="button"
+              >
+                <img
+                  alt="Удалить"
+                  class="sc-gsTDHW hJCXVh"
+                  src="/icons/trash.svg"
+                />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</DocumentFragment>
+`;
