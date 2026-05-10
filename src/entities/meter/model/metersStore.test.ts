@@ -6,18 +6,9 @@ jest.mock('@/entities/meter/api/metersApi', () => ({
 import { unprotect } from 'mobx-state-tree';
 import { MetersStore } from './metersStore';
 import { fetchMeters, deleteMeter } from '../api/metersApi';
+import type { MeterDTO } from './types';
 
-interface MeterApiItem {
-  id: string;
-  _type: string[];
-  installation_date: string;
-  is_automatic: boolean | null;
-  initial_values: number[];
-  description: string;
-  area: { id: string };
-}
-
-function buildMetersDto(count: number, offset = 0): MeterApiItem[] {
+function buildMetersDto(count: number, offset = 0): MeterDTO[] {
   return Array.from({ length: count }, (_, i) => ({
     id: String(offset + i + 1),
     _type: i % 2 === 0 ? ['ColdWaterAreaMeter', 'AreaMeter'] : ['HotWaterAreaMeter', 'AreaMeter'],

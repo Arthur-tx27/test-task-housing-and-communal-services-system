@@ -1,16 +1,7 @@
 import { types } from 'mobx-state-tree';
 import { MeterModel } from './meter';
 import { fetchMeters, deleteMeter } from '../api/metersApi';
-
-interface MeterApiItem {
-  id: string;
-  _type: string[];
-  installation_date: string;
-  is_automatic: boolean | null;
-  initial_values: number[];
-  description: string;
-  area: { id: string };
-}
+import type { MeterDTO } from './types';
 
 export const MetersStore = types
   .model('MetersStore', {
@@ -22,7 +13,7 @@ export const MetersStore = types
     error: types.maybeNull(types.string),
   })
   .actions((self) => {
-    function createMeterFromDto(dto: MeterApiItem) {
+    function createMeterFromDto(dto: MeterDTO) {
       return MeterModel.create({
         id: dto.id,
         _type: dto._type[0],
@@ -41,7 +32,7 @@ export const MetersStore = types
       setError(e: string | null) {
         self.error = e;
       },
-      setMeters(response: { count: number; results: MeterApiItem[] }) {
+      setMeters(response: { count: number; results: MeterDTO[] }) {
         self.meters.clear();
         self.totalCount = response.count;
         self.displayOffset = self.offset;
@@ -49,7 +40,7 @@ export const MetersStore = types
           self.meters.push(createMeterFromDto(dto));
         });
       },
-      appendMeters(results: MeterApiItem[]) {
+      appendMeters(results: MeterDTO[]) {
         results.forEach((dto) => {
           self.meters.push(createMeterFromDto(dto));
         });
