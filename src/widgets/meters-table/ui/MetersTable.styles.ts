@@ -1,37 +1,39 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const TableWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   overflow: hidden;
 `;
 
-export const FilterBar = styled.div`
-  display: flex;
-  align-items: center;
-  height: 32px;
-  padding: 0 ${({ theme }) => theme.spacing.lg};
-  background: ${({ theme }) => theme.colors.surfaceHeader};
-  font-size: ${({ theme }) => theme.fonts.sizeSm};
-  color: ${({ theme }) => theme.colors.textSecondary};
-
-  & > span:first-child {
-    padding-left: ${({ theme }) => theme.spacing.xl};
-  }
-`;
-
-export const FilterLabel = styled.span<{ $width?: string }>`
-  flex: ${({ $width }) => ($width ? 'none' : '1')};
-  width: ${({ $width }) => $width || 'auto'};
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-
 export const ScrollContainer = styled.div`
-  overflow-y: auto;
+  overflow: auto;
+  min-height: 0;
+  flex: 1;
+`;
+
+export const StyledThead = styled.thead`
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  `;
+
+export const Th = styled.th<{ $width?: string }>`
+  height: 32px;
+  width: ${({ $width }) => $width || 'auto'};
+  padding: 0 ${({ theme }) => theme.spacing.md};
+  font-size: ${({ theme }) => theme.fonts.sizeSm};
+  font-weight: ${({ theme }) => theme.fonts.weightMedium};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  background: ${({ theme }) => theme.colors.surfaceHeader};
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: middle;
+
 `;
 
 export const StyledTable = styled.table`
@@ -40,63 +42,64 @@ export const StyledTable = styled.table`
   table-layout: fixed;
 `;
 
-export const Thead = styled.thead`
-  & > tr > th {
-    position: sticky;
-    top: 0;
-    z-index: 2;
-  }
+export const BottomBar = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-shrink: 0;
+  height: 48px;
+  padding: 0 ${({ theme }) => theme.spacing.xl};
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+  background: ${({ theme }) => theme.colors.surface};
 `;
 
-export const Th = styled.th<{ $width?: string }>`
-  height: ${({ theme }) => theme.table.headerHeight};
-  width: ${({ $width }) => $width || 'auto'};
-  padding: 0 ${({ theme }) => theme.spacing.lg};
-  font-size: ${({ theme }) => theme.fonts.sizeSm};
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.textSecondary};
+export const Tr = styled.tr<{ $disabled?: boolean }>`
+  height: ${({ theme }) => theme.table.rowHeight};
   background: ${({ theme }) => theme.colors.surface};
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-  white-space: nowrap;
-  vertical-align: middle;
+  cursor: pointer;
 
-  &:first-child {
-    padding-left: ${({ theme }) => theme.spacing.xl};
-  }
-`;
 
-export const Tr = styled.tr`
-  height: ${({ theme }) => theme.table.rowHeight};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-
-  &:nth-child(even) {
+  &:hover {
     background: ${({ theme }) => theme.colors.surfaceAlt};
-  }
-
-  &:nth-child(odd) {
-    background: ${({ theme }) => theme.colors.surface};
   }
 
   &:hover .delete-button {
     opacity: 1;
     visibility: visible;
   }
+
+  ${({ $disabled, theme }) =>
+    $disabled &&
+    css`
+      color: ${theme.colors.textDisabled};
+      cursor: default;
+      pointer-events: none;
+
+      ${Td}, ${TypeCell}, ${TypeContent}, ${ActionsCell} {
+        color: ${theme.colors.textDisabled};
+      }
+
+      ${TypeIcon} {
+        opacity: 0.4;
+      }
+
+      &:hover {
+        background: ${theme.colors.surface};
+      }
+    `}
 `;
 
-export const Td = styled.td<{ $width?: string }>`
+export const Td = styled.td<{ $width?: string, $muted?: boolean }>`
   height: ${({ theme }) => theme.table.rowHeight};
   width: ${({ $width }) => $width || 'auto'};
-  padding: 0 ${({ theme }) => theme.spacing.lg};
+  padding: 0 ${({ theme }) => theme.spacing.md};
   font-size: ${({ theme }) => theme.fonts.sizeSm};
-  color: ${({ theme }) => theme.colors.textPrimary};
+  font-weight: ${({ theme }) => theme.fonts.weightRegular};
+  color: ${({ theme, $muted }) => $muted ? theme.colors.textMuted : theme.colors.textPrimary};
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
   vertical-align: middle;
-
-  &:first-child {
-    padding-left: ${({ theme }) => theme.spacing.xl};
-  }
 `;
 
 export const TypeCell = styled(Td)``;
@@ -114,6 +117,6 @@ export const TypeIcon = styled.img`
 `;
 
 export const ActionsCell = styled(Td)`
-  padding: 0 ${({ theme }) => theme.spacing.sm};
   text-align: center;
+  padding: 0 ${({ theme }) => theme.spacing.md};
 `;
