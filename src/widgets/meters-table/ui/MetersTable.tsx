@@ -6,6 +6,8 @@ import { Pagination } from '@/features/pagination/ui/Pagination';
 import { Loader } from '@/shared/ui/Loader';
 import { ErrorMessage } from '@/shared/ui/ErrorMessage';
 import { EmptyState } from '@/shared/ui/EmptyState';
+import { formatDate } from '@/shared/lib/formatDate';
+import { formatAddress } from '@/shared/lib/formatAddress';
 import {
   COLUMNS,
   COL_WIDTH,
@@ -26,10 +28,6 @@ import {
   TypeIcon,
   ActionsCell,
 } from './MetersTable.styles';
-
-function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('ru-RU');
-}
 
 export const MetersTable = observer(function MetersTable() {
   const store = useRootStore();
@@ -67,9 +65,7 @@ export const MetersTable = observer(function MetersTable() {
             <tbody>
               {meters.map((meter, index) => {
                 const area = areasMap.get(meter.areaId);
-                const address = area
-                  ? `${area.house.address}, ${area.str_number_full}`
-                  : '';
+                const address = formatAddress(area);
 
                 return (
                   <Tr key={meter.id} $disabled={isLoading}>
