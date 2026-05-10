@@ -16,18 +16,15 @@ export const PageButton = styled.button<{ $active?: boolean }>`
   height: 32px;
   padding: 0 ${({ theme }) => theme.spacing.sm};
   font-size: ${({ theme }) => theme.fonts.sizeSm};
-  color: ${({ theme, $active }) =>
-    $active ? theme.colors.surface : theme.colors.textDark};
+  font-weight: ${({ theme }) => theme.fonts.weightRegular};
+  color: ${({ theme }) => theme.colors.textDark};
   background: ${({ theme, $active }) =>
-    $active ? theme.colors.textPrimary : theme.colors.surface};
-  border: 1px solid
-    ${({ theme, $active }) =>
-      $active ? theme.colors.textPrimary : theme.colors.borderInput};
+    $active ? theme.colors.backgroundActive : theme.colors.surface};
+  border: 1px solid ${({ theme }) => theme.colors.borderDark};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
 
   &:hover:not(:disabled) {
     border-color: ${({ theme }) => theme.colors.textSecondary};
-    color: ${({ theme }) => theme.colors.textSecondary};
   }
 
   &:disabled {
@@ -35,7 +32,7 @@ export const PageButton = styled.button<{ $active?: boolean }>`
   }
 `;
 
-export const Ellipsis = styled.span`
+export const EllipsisButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -43,4 +40,32 @@ export const Ellipsis = styled.span`
   height: 32px;
   font-size: ${({ theme }) => theme.fonts.sizeSm};
   color: ${({ theme }) => theme.colors.textMuted};
+  cursor: pointer;
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.surfaceAlt};
+    color: ${({ theme }) => theme.colors.textPrimary};
+  }
+`;
+
+export const DropdownPopup = styled.div`
+  position: fixed;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  width: fit-content;
+  gap: ${({ theme }) => theme.spacing.xs};
+  padding: ${({ theme }) => theme.spacing.md};
+  background: ${({ theme }) => theme.colors.surface};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+  max-width: 320px;
+`;
+
+export const DropdownBackdrop = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 999;
 `;

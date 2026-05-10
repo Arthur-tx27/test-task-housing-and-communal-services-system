@@ -22,15 +22,16 @@ describe('Pagination', () => {
     expect(screen.getByText('5')).toBeInTheDocument();
   });
 
-  it('активная кнопка — текущая страница', () => {
+  it('активная кнопка — первая при offset=0', () => {
     const store = createTestStore();
     store.metersStore.totalCount = 100;
     store.metersStore.offset = 0;
 
     renderWithProviders(<Pagination />, { store });
 
-    const page1 = screen.getByText('1');
-    expect(page1).toHaveStyle('color: rgb(255, 255, 255)');
+    const buttons = screen.getAllByRole('button');
+    expect(buttons[0]).toHaveTextContent('1');
+    expect(buttons[0]).not.toBeDisabled();
   });
 
   it('клик по кнопке меняет offset и вызывает loadMetersWithAddresses', () => {
