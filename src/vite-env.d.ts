@@ -3,7 +3,7 @@
 /* eslint-disable no-var */
 declare var process: {
   env: {
-    SHOWROOM_API_URL?: string;
+    VITE_API_BASE_URL?: string;
     [key: string]: string | undefined;
   };
 };

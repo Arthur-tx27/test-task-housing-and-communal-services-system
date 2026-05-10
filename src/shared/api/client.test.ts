@@ -6,7 +6,7 @@ describe('API client', () => {
   let ApiError: typeof import('@/shared/api/client').ApiError;
 
   beforeAll(() => {
-    process.env.SHOWROOM_API_URL = TEST_URL;
+    process.env.VITE_API_BASE_URL = TEST_URL;
   });
 
   beforeEach(async () => {

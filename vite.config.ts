@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     define: {
-      'process.env.SHOWROOM_API_URL': JSON.stringify('/api'),
+      'process.env.VITE_API_BASE_URL': JSON.stringify('/api'),
     },
   };
 });
