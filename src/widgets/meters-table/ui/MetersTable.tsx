@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react-lite';
-import { useRootStore } from '@/app/providers/useRootStore';
 import { useMetersTable } from '../model/useMetersTable';
 import { DeleteButton } from '@/features/delete-meter/ui/DeleteButton';
 import { Pagination } from '@/features/pagination/ui/Pagination';
@@ -23,9 +22,8 @@ import {
 } from './MetersTable.styles';
 
 export const MetersTable = observer(function MetersTable() {
-  const store = useRootStore();
   const { scrollRef, showLoader, showError, showEmpty, rows, isLoading, error } =
-    useMetersTable(store);
+    useMetersTable();
 
   return (
     <TableWrapper>

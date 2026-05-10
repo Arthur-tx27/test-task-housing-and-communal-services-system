@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { type Instance } from 'mobx-state-tree';
-import type { RootStore } from '@/entities/root/model/rootStore';
+import { useRootStore } from '@/app/providers/useRootStore';
 import { formatDate } from '@/shared/lib/formatDate';
 import { formatAddress } from '@/shared/lib/formatAddress';
 import {
@@ -21,7 +20,8 @@ export interface TableRow {
   description: string;
 }
 
-export function useMetersTable(store: Instance<typeof RootStore>) {
+export function useMetersTable() {
+  const store = useRootStore();
   const { meters, displayOffset, isLoading, error } = store.metersStore;
   const { areasMap } = store.areasStore;
 
