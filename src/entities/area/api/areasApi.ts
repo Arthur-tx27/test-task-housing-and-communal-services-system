@@ -12,11 +12,9 @@ export async function fetchAreasByIds(ids: string[]): Promise<AreaDTO[]> {
   const unknownIds = uniqueIds.filter((id) => !cache.has(id));
 
   if (unknownIds.length > 0) {
-    const params = {
-      id__in: unknownIds.join(','),
-    };
-
-    const response = await get<{ results: AreaDTO[] }>('/areas/', params);
+    const response = await get<{ results: AreaDTO[] }>('/areas/', {
+      id__in: unknownIds,
+    });
 
     response.results.forEach((area) => {
       cache.set(area.id, area);

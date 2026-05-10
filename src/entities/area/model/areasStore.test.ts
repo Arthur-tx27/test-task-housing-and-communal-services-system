@@ -11,9 +11,14 @@ import type { AreaDTO } from './types';
 function buildAreas(ids: string[]): AreaDTO[] {
   return ids.map((id) => ({
     id,
-    house: `ул. Ленина, ${id.slice(-2)}`,
-    str_number_full: `ул. Ленина, ${id.slice(-2)}`,
-    apartment: String(10 + Number(id.slice(-1))),
+    number: 1,
+    str_number: String(id.slice(-2)),
+    str_number_full: `кв. ${id.slice(-2)}`,
+    house: {
+      address: `ул. Ленина, ${id.slice(-2)}`,
+      id: `house-${id}`,
+      fias_addrobjs: [],
+    },
   }));
 }
 
