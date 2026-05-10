@@ -18,7 +18,7 @@ export const DeleteButton = observer(function DeleteButton({
       disabled={store.metersStore.isLoading}
       onClick={() => store.deleteMeter(meterId)}
     >
-      <TrashIcon src="/icons/trash.svg" alt="Удалить" />
+      <TrashIcon />
     </StyledDeleteButton>
   );
 });

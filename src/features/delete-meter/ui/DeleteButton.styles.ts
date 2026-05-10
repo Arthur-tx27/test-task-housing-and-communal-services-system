@@ -7,6 +7,7 @@ export const StyledDeleteButton = styled.button`
   width: 40px;
   height: 40px;
   background: ${({ theme }) => theme.colors.dangerBg};
+  color: ${({ theme }) => theme.colors.dangerColor};
   border-radius: ${({ theme }) => theme.borderRadius.md};
 
   opacity: 0;
@@ -14,16 +15,21 @@ export const StyledDeleteButton = styled.button`
   transition: opacity 0.15s ease, visibility 0.15s ease;
 
   &:hover:not(:disabled) {
-    background: #fdd5d5;
+    background: ${({ theme }) => theme.colors.dangerBgHover};
+    color:${({ theme }) => theme.colors.dangerColorHover};
   }
 
   &:disabled {
-    opacity: 0.3;
-    visibility: visible;
+    background: none;
+    color: ${({theme}) => theme.colors.textDisabled}
   }
 `;
 
-export const TrashIcon = styled.img`
+export const TrashIcon = styled.span`
+  display: block;
   width: 20px;
   height: 20px;
+  background: currentColor;
+  mask: url('/icons/trash.svg') center / contain no-repeat;
+  -webkit-mask: url('/icons/trash.svg') center / contain no-repeat;
 `;
