@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { useRootStore } from '@/shared/lib/hooks/useRootStore';
+import { useRootStore } from '@/app/providers/useRootStore';
 import { MetersTable } from '@/widgets/meters-table/ui/MetersTable';
 import { PageContainer, PageTitle } from './MetersListPage.styles';
 

@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { useRootStore } from '@/shared/lib/hooks/useRootStore';
+import { useRootStore } from '@/app/providers/useRootStore';
 import { StyledDeleteButton, TrashIcon } from './DeleteButton.styles';
 
 interface DeleteButtonProps {

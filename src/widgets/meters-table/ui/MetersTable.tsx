@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
-import { useRootStore } from '@/shared/lib/hooks/useRootStore';
+import { useRootStore } from '@/app/providers/useRootStore';
 import { DeleteButton } from '@/features/delete-meter/ui/DeleteButton';
 import { Pagination } from '@/features/pagination/ui/Pagination';
 import { Loader } from '@/shared/ui/Loader';
