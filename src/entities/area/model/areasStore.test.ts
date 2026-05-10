@@ -5,21 +5,7 @@ jest.mock('@/entities/area/api/areasApi', () => ({
 import { unprotect } from 'mobx-state-tree';
 import { AreasStore } from './areasStore';
 import { fetchAreasByIds } from '../api/areasApi';
-import type { AreaDTO } from './types';
-
-function buildAreas(ids: string[]): AreaDTO[] {
-  return ids.map((id) => ({
-    id,
-    number: 1,
-    str_number: String(id.slice(-2)),
-    str_number_full: `кв. ${id.slice(-2)}`,
-    house: {
-      address: `ул. Ленина, ${id.slice(-2)}`,
-      id: `house-${id}`,
-      fias_addrobjs: [],
-    },
-  }));
-}
+import { createAreasDto } from '@/shared/lib/test/fixtures';
 
 function createStore() {
   const store = AreasStore.create();
@@ -35,7 +21,7 @@ describe('AreasStore', () => {
   describe('fetchAreas', () => {
     it('загружает новые адреса по id', async () => {
       const ids = ['area-1', 'area-2'];
-      const areas = buildAreas(ids);
+      const areas = createAreasDto(ids);
       (fetchAreasByIds as jest.Mock).mockResolvedValue(areas);
 
       const store = createStore();
@@ -47,7 +33,7 @@ describe('AreasStore', () => {
 
     it('не делает запрос если все id уже в кэше', async () => {
       const ids = ['area-1', 'area-2'];
-      const areas = buildAreas(ids);
+      const areas = createAreasDto(ids);
       (fetchAreasByIds as jest.Mock).mockResolvedValue(areas);
 
       const store = createStore();
@@ -59,8 +45,8 @@ describe('AreasStore', () => {
     });
 
     it('запрашивает только неизвестные id', async () => {
-      const areas1 = buildAreas(['area-1']);
-      const areas2 = buildAreas(['area-2']);
+      const areas1 = createAreasDto(['area-1']);
+      const areas2 = createAreasDto(['area-2']);
       (fetchAreasByIds as jest.Mock)
         .mockResolvedValueOnce(areas1)
         .mockResolvedValueOnce(areas2);
@@ -75,7 +61,7 @@ describe('AreasStore', () => {
 
     it('загружает несколько id параллельно за один запрос', async () => {
       const ids = ['area-1', 'area-2', 'area-3'];
-      const areas = buildAreas(ids);
+      const areas = createAreasDto(ids);
       (fetchAreasByIds as jest.Mock).mockResolvedValue(areas);
 
       const store = createStore();
@@ -108,7 +94,7 @@ describe('AreasStore', () => {
 
   describe('clear', () => {
     it('очищает карту адресов', async () => {
-      const areas = buildAreas(['area-1']);
+      const areas = createAreasDto(['area-1']);
       (fetchAreasByIds as jest.Mock).mockResolvedValue(areas);
 
       const store = createStore();

@@ -1,14 +1,13 @@
 import { renderWithProviders, createTestStore } from '@/shared/lib/test/renderWithProviders';
 import { MetersTable } from './MetersTable';
-import { MeterModel } from '@/entities/meter/model/meter';
-import { AreaModel } from '@/entities/area/model/area';
+import { createTestMeter, createTestArea } from '@/shared/lib/test/fixtures';
 
 describe('MetersTable снапшот', () => {
   it('отрисовывает таблицу с тестовыми данными', () => {
     const store = createTestStore();
     store.metersStore.totalCount = 2;
     store.metersStore.meters.push(
-      MeterModel.create({
+      createTestMeter({
         id: '1',
         _type: 'ColdWaterAreaMeter',
         installation_date: '2024-05-10',
@@ -20,10 +19,8 @@ describe('MetersTable снапшот', () => {
     );
     store.areasStore.areasMap.set(
       'a1',
-      AreaModel.create({
+      createTestArea({
         id: 'a1',
-        number: 1,
-        str_number: '1',
         str_number_full: 'кв. 12',
         house: {
           address: 'ул. Мира, 5',
