@@ -2,6 +2,7 @@ import { types } from 'mobx-state-tree';
 import { MeterModel } from './meter';
 import { fetchMeters, deleteMeter } from '../api/metersApi';
 import type { MeterDTO } from './types';
+import { mapMeterFromDto } from '../lib/mapMeter';
 import { ERROR_LOAD_METERS, ERROR_DELETE_METER } from '@/shared/constants/api';
 
 export const MetersStore = types
@@ -14,18 +15,6 @@ export const MetersStore = types
     error: types.maybeNull(types.string),
   })
   .actions((self) => {
-    function createMeterFromDto(dto: MeterDTO) {
-      return MeterModel.create({
-        id: dto.id,
-        _type: dto._type[0],
-        installation_date: dto.installation_date,
-        is_automatic: dto.is_automatic ?? false,
-        initial_values: dto.initial_values,
-        description: dto.description ?? '',
-        areaId: dto.area.id,
-      });
-    }
-
     return {
       setLoading(v: boolean) {
         self.isLoading = v;
@@ -38,12 +27,12 @@ export const MetersStore = types
         self.totalCount = response.count;
         self.displayOffset = self.offset;
         response.results.forEach((dto) => {
-          self.meters.push(createMeterFromDto(dto));
+            self.meters.push(mapMeterFromDto(dto));
         });
       },
       appendMeters(results: MeterDTO[]) {
         results.forEach((dto) => {
-          self.meters.push(createMeterFromDto(dto));
+            self.meters.push(mapMeterFromDto(dto));
         });
       },
       removeMeterById(id: string) {
