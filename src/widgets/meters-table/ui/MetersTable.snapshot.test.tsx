@@ -1,18 +1,19 @@
 import { renderWithProviders, createTestStore } from '@/shared/lib/test/renderWithProviders';
-import { MetersListPage } from '@/pages/meters-list/ui/MetersListPage';
+import { MetersTable } from './MetersTable';
 import { MeterModel } from '@/entities/meter/model/meter';
 import { AreaModel } from '@/entities/area/model/area';
 
-describe('MetersListPage снапшот', () => {
-  it('отрисовывает страницу с мок-стором', () => {
+describe('MetersTable снапшот', () => {
+  it('отрисовывает таблицу с тестовыми данными', () => {
     const store = createTestStore();
+    store.metersStore.totalCount = 2;
     store.metersStore.meters.push(
       MeterModel.create({
         id: '1',
         _type: 'ColdWaterAreaMeter',
-        installation_date: '2024-01-01',
-        is_automatic: false,
-        initial_values: [0],
+        installation_date: '2024-05-10',
+        is_automatic: true,
+        initial_values: [100],
         description: '',
         areaId: 'a1',
       })
@@ -23,17 +24,16 @@ describe('MetersListPage снапшот', () => {
         id: 'a1',
         number: 1,
         str_number: '1',
-        str_number_full: 'кв. 1',
+        str_number_full: 'кв. 12',
         house: {
-          address: 'ул. Тестовая, 1',
+          address: 'ул. Мира, 5',
           id: 'house-a1',
           fias_addrobjs: [],
         },
       })
     );
-    store.metersStore.totalCount = 1;
 
-    const { asFragment } = renderWithProviders(<MetersListPage />, { store });
+    const { asFragment } = renderWithProviders(<MetersTable />, { store });
     expect(asFragment()).toMatchSnapshot();
   });
 });

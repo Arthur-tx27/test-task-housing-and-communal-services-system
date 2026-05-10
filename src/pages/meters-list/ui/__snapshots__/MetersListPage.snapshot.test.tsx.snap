@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`Снапшот-тесты снапшот MetersListPage с мок-стором 1`] = `
+exports[`MetersListPage снапшот отрисовывает страницу с мок-стором 1`] = `
 <DocumentFragment>
   <div
     class="sc-bBXraC dDerTG"
@@ -130,130 +130,6 @@ exports[`Снапшот-тесты снапшот MetersListPage с мок-ст�
         class="sc-bkAakD jIIeon"
       />
     </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`Снапшот-тесты снапшот MetersTable с тестовыми данными 1`] = `
-<DocumentFragment>
-  <div
-    class="sc-bqyIgP kkQIEe"
-  >
-    <div
-      class="sc-kstoPm cMnaYH scroll-container"
-    >
-      <table
-        class="sc-fFubTW XkpcA"
-      >
-        <thead
-          class="sc-hBFaCF hPziSu"
-        >
-          <tr>
-            <th
-              class="sc-fodXMg lifdOI"
-            >
-              №
-            </th>
-            <th
-              class="sc-fodXMg brSFxr"
-            >
-              Тип
-            </th>
-            <th
-              class="sc-fodXMg kfkOdn"
-            >
-              Дата установки
-            </th>
-            <th
-              class="sc-fodXMg knA-doD"
-            >
-              Автоматический
-            </th>
-            <th
-              class="sc-fodXMg cxZTUf"
-            >
-              Текущие показания
-            </th>
-            <th
-              class="sc-fodXMg lkqhCP"
-            >
-              Адрес
-            </th>
-            <th
-              class="sc-fodXMg frChAX"
-            >
-              Примечание
-            </th>
-            <th
-              class="sc-fodXMg bPJjym"
-            />
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            class="sc-idOkdQ dTwZGA"
-          >
-            <td
-              class="sc-dIUiux gKhmWl"
-            >
-              1
-            </td>
-            <td
-              class="sc-dIUiux sc-hHfrpe eHPaTq"
-            >
-              <span
-                class="sc-dmlpFL gLwuJB"
-              >
-                <img
-                  alt=""
-                  class="sc-kfzzyY kkxPaH"
-                  src="/icons/hvs.svg"
-                />
-                ХВС
-              </span>
-            </td>
-            <td
-              class="sc-dIUiux hQNhqa"
-            >
-              10.05.2024
-            </td>
-            <td
-              class="sc-dIUiux hbDmBa"
-            >
-              Да
-            </td>
-            <td
-              class="sc-dIUiux cDsJIC"
-            >
-              100
-            </td>
-            <td
-              class="sc-dIUiux jDegZu"
-            >
-              ул. Мира, 5, кв. 12
-            </td>
-            <td
-              class="sc-dIUiux fRiYSH"
-            />
-            <td
-              class="sc-dIUiux sc-fKFxPF bquyL gHbYAW"
-            >
-              <button
-                class="sc-bdfDLd iopmhw delete-button"
-                type="button"
-              >
-                <span
-                  class="sc-gsTDHW jzTWcK"
-                />
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div
-      class="sc-bkAakD jIIeon"
-    />
   </div>
 </DocumentFragment>
 `;
