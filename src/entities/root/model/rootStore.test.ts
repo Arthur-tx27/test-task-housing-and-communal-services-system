@@ -5,41 +5,16 @@ jest.mock('@/entities/meter/api/metersApi', () => ({
 
 jest.mock('@/entities/area/api/areasApi', () => ({
   fetchAreasByIds: jest.fn(),
-  clearCache: jest.fn(),
 }));
 
 import { unprotect } from 'mobx-state-tree';
 import { RootStore } from './rootStore';
 import { fetchMeters } from '@/entities/meter/api/metersApi';
 import { fetchAreasByIds } from '@/entities/area/api/areasApi';
-import type { MeterDTO } from '@/entities/meter/model/types';
-import type { AreaDTO } from '@/entities/area/model/types';
-
-function buildMeterDto(id: string, areaId: string): MeterDTO {
-  return {
-    id,
-    _type: ['ColdWaterAreaMeter', 'AreaMeter'],
-    installation_date: '2024-01-15',
-    is_automatic: false,
-    initial_values: [100],
-    description: `метр №${id}`,
-    area: { id: areaId },
-  };
-}
-
-function buildAreaDto(id: string): AreaDTO {
-  return {
-    id,
-    number: 1,
-    str_number: '1',
-    str_number_full: 'кв. 42',
-    house: {
-      address: `ул. Ленина, ${id}`,
-      id: `house-${id}`,
-      fias_addrobjs: [],
-    },
-  };
-}
+import {
+  createSingleMeterDto,
+  createSingleAreaDto,
+} from '@/shared/lib/test/fixtures';
 
 function createStore() {
   const store = RootStore.create();
@@ -55,10 +30,10 @@ describe('RootStore', () => {
   describe('loadMetersWithAddresses', () => {
     it('загружает метры и адреса к ним', async () => {
       const meters = [
-        buildMeterDto('1', 'area-1'),
-        buildMeterDto('2', 'area-2'),
+        createSingleMeterDto('1', 'area-1'),
+        createSingleMeterDto('2', 'area-2'),
       ];
-      const areas = [buildAreaDto('area-1'), buildAreaDto('area-2')];
+      const areas = [createSingleAreaDto('area-1'), createSingleAreaDto('area-2')];
 
       (fetchMeters as jest.Mock).mockResolvedValue({
         count: 2,
@@ -91,10 +66,10 @@ describe('RootStore', () => {
 
     it('дедуплицирует id адресов', async () => {
       const meters = [
-        buildMeterDto('1', 'area-1'),
-        buildMeterDto('2', 'area-1'),
+        createSingleMeterDto('1', 'area-1'),
+        createSingleMeterDto('2', 'area-1'),
       ];
-      const areas = [buildAreaDto('area-1')];
+      const areas = [createSingleAreaDto('area-1')];
 
       (fetchMeters as jest.Mock).mockResolvedValue({
         count: 2,
@@ -111,7 +86,7 @@ describe('RootStore', () => {
 
   describe('deleteMeter', () => {
     it('удаляет метр и обновляет адреса', async () => {
-      const meters = [buildMeterDto('1', 'area-1')];
+      const meters = [createSingleMeterDto('1', 'area-1')];
       (fetchMeters as jest.Mock)
         .mockResolvedValueOnce({ count: 1, results: meters })
         .mockResolvedValueOnce({ count: 0, results: [] });

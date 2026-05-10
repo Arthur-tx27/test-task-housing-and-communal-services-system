@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
+  :root {
+    --scrollbar-thumb-color: ${({ theme }) => theme.colors.textMuted};
+  }
+
   *,
   *::before,
   *::after {

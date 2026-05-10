@@ -1,16 +1,9 @@
 import { types } from 'mobx-state-tree';
 import { MeterModel } from './meter';
 import { fetchMeters, deleteMeter } from '../api/metersApi';
-
-interface MeterApiItem {
-  id: string;
-  _type: string[];
-  installation_date: string;
-  is_automatic: boolean | null;
-  initial_values: number[];
-  description: string;
-  area: { id: string };
-}
+import type { MeterDTO } from './types';
+import { mapMeterFromDto } from '../lib/mapMeter';
+import { ERROR_LOAD_METERS, ERROR_DELETE_METER } from '@/shared/constants/api';
 
 export const MetersStore = types
   .model('MetersStore', {
@@ -22,18 +15,6 @@ export const MetersStore = types
     error: types.maybeNull(types.string),
   })
   .actions((self) => {
-    function createMeterFromDto(dto: MeterApiItem) {
-      return MeterModel.create({
-        id: dto.id,
-        _type: dto._type[0],
-        installation_date: dto.installation_date,
-        is_automatic: dto.is_automatic ?? false,
-        initial_values: dto.initial_values,
-        description: dto.description ?? '',
-        areaId: dto.area.id,
-      });
-    }
-
     return {
       setLoading(v: boolean) {
         self.isLoading = v;
@@ -41,17 +22,17 @@ export const MetersStore = types
       setError(e: string | null) {
         self.error = e;
       },
-      setMeters(response: { count: number; results: MeterApiItem[] }) {
+      setMeters(response: { count: number; results: MeterDTO[] }) {
         self.meters.clear();
         self.totalCount = response.count;
         self.displayOffset = self.offset;
         response.results.forEach((dto) => {
-          self.meters.push(createMeterFromDto(dto));
+            self.meters.push(mapMeterFromDto(dto));
         });
       },
-      appendMeters(results: MeterApiItem[]) {
+      appendMeters(results: MeterDTO[]) {
         results.forEach((dto) => {
-          self.meters.push(createMeterFromDto(dto));
+            self.meters.push(mapMeterFromDto(dto));
         });
       },
       removeMeterById(id: string) {
@@ -74,7 +55,7 @@ export const MetersStore = types
         self.setError(
           err instanceof Error
             ? err.message
-            : 'Ошибка загрузки данных'
+            : ERROR_LOAD_METERS
         );
       } finally {
         self.setLoading(false);
@@ -99,7 +80,7 @@ export const MetersStore = types
         self.setError(
           err instanceof Error
             ? err.message
-            : 'Ошибка удаления счётчика'
+            : ERROR_DELETE_METER
         );
       } finally {
         self.setLoading(false);

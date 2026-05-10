@@ -2,6 +2,7 @@ import { types } from 'mobx-state-tree';
 import { AreaModel } from './area';
 import type { AreaDTO } from './types';
 import { fetchAreasByIds } from '../api/areasApi';
+import { ERROR_LOAD_AREAS } from '@/shared/constants/api';
 
 export const AreasStore = types
   .model('AreasStore', {
@@ -37,7 +38,7 @@ export const AreasStore = types
         self.setAreas(areas);
       } catch (err) {
         self.setError(
-          err instanceof Error ? err.message : 'Ошибка загрузки адресов'
+          err instanceof Error ? err.message : ERROR_LOAD_AREAS
         );
       } finally {
         self.setLoading(false);

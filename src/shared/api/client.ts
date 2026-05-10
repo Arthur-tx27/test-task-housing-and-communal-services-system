@@ -1,4 +1,4 @@
-const BASE_URL = process.env.SHOWROOM_API_URL ?? '';
+const BASE_URL = process.env.VITE_API_BASE_URL ?? '';
 
 export class ApiError extends Error {
   status: number;

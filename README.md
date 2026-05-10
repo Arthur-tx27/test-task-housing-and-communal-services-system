@@ -18,29 +18,29 @@ npm run dev
 
 ## Команды
 
-| Команда              | Описание                           |
-| -------------------- | ---------------------------------- |
-| `npm run dev`        | Vite dev-server                    |
-| `npm run build`      | Production-сборка (tsc + vite)     |
-| `npm run preview`    | Предпросмотр production-сборки     |
-| `npm run lint`       | ESLint (flat config)               |
-| `npm run typecheck`  | TypeScript проверка                |
-| `npm run test`       | Jest (все тесты)                   |
-| `npm run test -- -t "название"` | Один тест по названию |
+| Команда                          | Описание                              |
+| -------------------------------- | ------------------------------------- |
+| `npm run dev`                    | Vite dev-server                       |
+| `npm run build`                  | Production-сборка (tsc + vite)        |
+| `npm run preview`                | Предпросмотр production-сборки        |
+| `npm run lint`                   | ESLint (flat config)                  |
+| `npm run typecheck`              | TypeScript проверка                   |
+| `npm run test`                   | Jest (все тесты)                      |
+| `npm run test -- -t "название"`  | Один тест по названию                 |
 
 ## Архитектура (Feature-Sliced Design)
 
 ```
 src/
-  app/          # App.tsx, main.tsx, providers (StoreProvider), styles
+  app/          # App.tsx, main.tsx, providers, styles
   pages/        # страницы (meters-list)
   widgets/      # составные компоненты (MetersTable)
   features/     # бизнес-фичи (delete-meter, pagination)
-  entities/     # MST-модели, типы, API-сервисы (meter, area)
+  entities/     # MST-модели, типы, API-сервисы (meter, area, root)
   shared/       # API-клиент, константы, утилиты, UI-компоненты
 ```
 
-Каждый модуль следует структуре: `ui/`, `model/`, `api/`, `index.ts`. Слой импортирует только нижележащие слои.
+Каждый модуль: `ui/`, `model/`, `api/`, `lib/`, `index.ts`. Слой импортирует только нижележащие слои. `shared/` не импортирует другие слои (кроме тестовых утилит).
 
 ## Стек
 
@@ -52,11 +52,7 @@ src/
 
 ## API-эндпоинты
 
-Базовый URL настраивается в `.env`:
-
-```
-SHOWROOM_API_URL=http://showroom.eis24.me/c300/api/v4/test
-```
+Базовый URL настраивается через `.env` (переменная `VITE_API_TARGET` для прокси Vite, `VITE_API_BASE_URL` для тестов).
 
 | Метод   | Путь           | Параметры              |
 | ------- | -------------- | ---------------------- |
@@ -69,23 +65,36 @@ SHOWROOM_API_URL=http://showroom.eis24.me/c300/api/v4/test
 ```
 src/
 ├── app/
-│   ├── providers/         # StoreProvider, storeContext
-│   └── styles/            # theme.ts, GlobalStyles.ts, styled.d.ts
+│   ├── providers/           # StoreProvider, storeContext, useRootStore
+│   └── styles/              # theme.ts, GlobalStyles.ts, scrollbar.css, styled.d.ts
 ├── pages/
-│   └── meters-list/       # MetersListPage
+│   └── meters-list/ui/      # MetersListPage + styles + тесты
 ├── widgets/
-│   └── meters-table/      # MetersTable
+│   └── meters-table/
+│       ├── model/           # useMetersTable (хук с бизнес-логикой)
+│       └── ui/              # MetersTable (чистый рендер) + styles + тесты
 ├── features/
-│   ├── delete-meter/      # DeleteButton
-│   └── pagination/        # Pagination
+│   ├── delete-meter/ui/     # DeleteButton + styles + тесты
+│   └── pagination/
+│       ├── model/           # usePagination, pagination.utils, types
+│       └── ui/              # Pagination (чистый рендер) + styles + тесты
 ├── entities/
-│   ├── area/              # AreaModel, AreasStore, areasApi
-│   ├── meter/             # MeterModel, MetersStore, metersApi
-│   └── root/              # RootStore
+│   ├── area/
+│   │   ├── api/             # areasApi (fetchAreasByIds)
+│   │   └── model/           # AreaModel, AreasStore, types + тесты
+│   ├── meter/
+│   │   ├── api/             # metersApi (fetchMeters, deleteMeter)
+│   │   ├── lib/             # mapMeterFromDto (DTO → модель)
+│   │   └── model/           # MeterModel, MetersStore, types + тесты
+│   └── root/model/          # RootStore + тесты
 ├── shared/
-│   ├── api/               # client.ts (get, del, ApiError)
-│   ├── lib/               # hooks (useRootStore), test helpers
-│   └── ui/                # Loader, ErrorMessage, EmptyState
+│   ├── api/                 # client.ts (get, del, ApiError) + тесты
+│   ├── constants/           # api.ts, meterTypes.ts, pagination.ts, cssClasses.ts
+│   ├── lib/
+│   │   ├── formatDate.ts
+│   │   ├── formatAddress.ts
+│   │   └── test/            # fixtures.ts, renderWithProviders.tsx, setup.ts
+│   └── ui/                  # Loader, ErrorMessage, EmptyState
 ├── App.tsx
 ├── main.tsx
 └── vite-env.d.ts

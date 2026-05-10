@@ -6,28 +6,7 @@ jest.mock('@/entities/meter/api/metersApi', () => ({
 import { unprotect } from 'mobx-state-tree';
 import { MetersStore } from './metersStore';
 import { fetchMeters, deleteMeter } from '../api/metersApi';
-
-interface MeterApiItem {
-  id: string;
-  _type: string[];
-  installation_date: string;
-  is_automatic: boolean | null;
-  initial_values: number[];
-  description: string;
-  area: { id: string };
-}
-
-function buildMetersDto(count: number, offset = 0): MeterApiItem[] {
-  return Array.from({ length: count }, (_, i) => ({
-    id: String(offset + i + 1),
-    _type: i % 2 === 0 ? ['ColdWaterAreaMeter', 'AreaMeter'] : ['HotWaterAreaMeter', 'AreaMeter'],
-    installation_date: `2024-01-${String(i + 1).padStart(2, '0')}`,
-    is_automatic: i % 3 === 0,
-    initial_values: [100 + i],
-    description: `метр №${offset + i + 1}`,
-    area: { id: `area-${i + 1}` },
-  }));
-}
+import { createMetersDto } from '@/shared/lib/test/fixtures';
 
 function createStore() {
   const store = MetersStore.create();
@@ -42,7 +21,7 @@ describe('MetersStore', () => {
 
   describe('loadMeters', () => {
     it('загружает 20 элементов и устанавливает totalCount', async () => {
-      const items = buildMetersDto(20);
+      const items = createMetersDto(20);
       (fetchMeters as jest.Mock).mockResolvedValue({
         count: 45,
         next: null,
@@ -87,7 +66,7 @@ describe('MetersStore', () => {
 
   describe('deleteMeter', () => {
     it('удаляет метр и дозагружает один, сохраняя 20 элементов', async () => {
-      const items = buildMetersDto(20);
+      const items = createMetersDto(20);
       (fetchMeters as jest.Mock)
         .mockResolvedValueOnce({ count: 45, results: items })
         .mockResolvedValueOnce({
@@ -121,7 +100,7 @@ describe('MetersStore', () => {
     });
 
     it('устанавливает ошибку при сбое удаления', async () => {
-      const items = buildMetersDto(20);
+      const items = createMetersDto(20);
       (fetchMeters as jest.Mock).mockResolvedValue({
         count: 45,
         results: items,
@@ -162,7 +141,7 @@ describe('MetersStore', () => {
 
   describe('clear', () => {
     it('сбрасывает все поля в начальное состояние', async () => {
-      const items = buildMetersDto(20);
+      const items = createMetersDto(20);
       (fetchMeters as jest.Mock).mockResolvedValue({
         count: 45,
         results: items,

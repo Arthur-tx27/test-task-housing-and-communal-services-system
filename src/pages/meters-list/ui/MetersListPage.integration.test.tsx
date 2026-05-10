@@ -1,7 +1,6 @@
 import { renderWithProviders, createTestStore } from '@/shared/lib/test/renderWithProviders';
 import { MetersListPage } from '@/pages/meters-list/ui/MetersListPage';
-import { MeterModel } from '@/entities/meter/model/meter';
-import { AreaModel } from '@/entities/area/model/area';
+import { createTestMeter, createTestArea } from '@/shared/lib/test/fixtures';
 
 describe('Интеграционный тест', () => {
   it('полный сценарий: загрузка данных → отображение таблицы', () => {
@@ -11,7 +10,7 @@ describe('Интеграционный тест', () => {
     store.metersStore.offset = 0;
 
     store.metersStore.meters.push(
-      MeterModel.create({
+      createTestMeter({
         id: '1',
         _type: 'ColdWaterAreaMeter',
         installation_date: '2024-01-15',
@@ -20,7 +19,7 @@ describe('Интеграционный тест', () => {
         description: 'метр 1',
         areaId: 'a1',
       }),
-      MeterModel.create({
+      createTestMeter({
         id: '2',
         _type: 'HotWaterAreaMeter',
         installation_date: '2024-03-20',
@@ -29,7 +28,7 @@ describe('Интеграционный тест', () => {
         description: 'метр 2',
         areaId: 'a2',
       }),
-      MeterModel.create({
+      createTestMeter({
         id: '3',
         _type: 'ColdWaterAreaMeter',
         installation_date: '2024-06-10',
@@ -42,10 +41,8 @@ describe('Интеграционный тест', () => {
 
     store.areasStore.areasMap.set(
       'a1',
-      AreaModel.create({
+      createTestArea({
         id: 'a1',
-        number: 1,
-        str_number: '1',
         str_number_full: 'кв. 10',
         house: {
           address: 'пр. Ленина, 1',
@@ -56,7 +53,7 @@ describe('Интеграционный тест', () => {
     );
     store.areasStore.areasMap.set(
       'a2',
-      AreaModel.create({
+      createTestArea({
         id: 'a2',
         number: 2,
         str_number: '2',

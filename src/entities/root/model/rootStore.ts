@@ -7,26 +7,25 @@ export const RootStore = types
     metersStore: types.optional(MetersStore, {}),
     areasStore: types.optional(AreasStore, {}),
   })
+  .views((self) => ({
+    get uniqueAreaIds() {
+      return [...new Set(self.metersStore.meters.map((m) => m.areaId))];
+    },
+  }))
   .actions((self) => ({
     async loadMetersWithAddresses() {
       await self.metersStore.loadMeters();
 
-      const areaIds = self.metersStore.meters.map((m) => m.areaId);
-      const uniqueIds = [...new Set(areaIds)];
-
-      if (uniqueIds.length > 0) {
-        await self.areasStore.fetchAreas(uniqueIds);
+      if (self.uniqueAreaIds.length > 0) {
+        await self.areasStore.fetchAreas(self.uniqueAreaIds);
       }
     },
 
     async deleteMeter(id: string) {
       await self.metersStore.removeMeter(id);
 
-      const areaIds = self.metersStore.meters.map((m) => m.areaId);
-      const uniqueIds = [...new Set(areaIds)];
-
-      if (uniqueIds.length > 0) {
-        await self.areasStore.fetchAreas(uniqueIds);
+      if (self.uniqueAreaIds.length > 0) {
+        await self.areasStore.fetchAreas(self.uniqueAreaIds);
       }
     },
 
