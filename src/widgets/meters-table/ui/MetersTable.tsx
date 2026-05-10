@@ -7,6 +7,12 @@ import { Loader } from '@/shared/ui/Loader';
 import { ErrorMessage } from '@/shared/ui/ErrorMessage';
 import { EmptyState } from '@/shared/ui/EmptyState';
 import {
+  COLUMNS,
+  COL_WIDTH,
+  TYPE_LABELS,
+  TYPE_ICONS,
+} from '@/shared/constants/meterTypes';
+import {
   TableWrapper,
   ScrollContainer,
   StyledThead,
@@ -20,34 +26,6 @@ import {
   TypeIcon,
   ActionsCell,
 } from './MetersTable.styles';
-
-interface ColumnDef {
-  label: string;
-  width: string;
-}
-
-const COLUMNS: ColumnDef[] = [
-  { label: '№', width: '48px' },
-  { label: 'Тип', width: '120px' },
-  { label: 'Дата установки', width: '160px' },
-  { label: 'Автоматический', width: '128px' },
-  { label: 'Текущие показания', width: '146px' },
-  { label: 'Адрес', width: '430px' },
-  { label: 'Примечание', width: '304px' },
-  { label: '', width: '64px' },
-];
-
-const COL_WIDTH = COLUMNS.map((c) => c.width);
-
-const TYPE_LABELS: Record<string, string> = {
-  ColdWaterAreaMeter: 'ХВС',
-  HotWaterAreaMeter: 'ГВС',
-};
-
-const TYPE_ICONS: Record<string, string> = {
-  ColdWaterAreaMeter: '/icons/hvs.svg',
-  HotWaterAreaMeter: '/icons/gvs.svg',
-};
 
 function formatDate(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString('ru-RU');

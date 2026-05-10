@@ -2,6 +2,15 @@ import { useState, type MouseEvent } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useRootStore } from '@/app/providers/useRootStore';
 import {
+  PAGE_SIZE,
+  PAGINATION_MAX_VISIBLE,
+  PAGINATION_LEFT_SLICE,
+  PAGINATION_RIGHT_SLICE,
+  PAGINATION_CENTER_RADIUS,
+  PAGINATION_SMALL_THRESHOLD,
+  PAGINATION_RIGHT_THRESHOLD_OFFSET,
+} from '@/shared/constants/pagination';
+import {
   PaginationContainer,
   PageButton,
   EllipsisButton,
@@ -9,30 +18,28 @@ import {
   DropdownBackdrop,
 } from './Pagination.styles';
 
-const PAGE_SIZE = 20;
-
 function getPageNumbers(
   current: number,
   total: number
 ): (number | 'ellipsis')[] {
-  if (total <= 7) {
+  if (total <= PAGINATION_MAX_VISIBLE) {
     return Array.from({ length: total }, (_, i) => i + 1);
   }
 
   const pages: (number | 'ellipsis')[] = [];
 
-  if (current <= 4) {
-    for (let i = 1; i <= 5; i++) pages.push(i);
+  if (current <= PAGINATION_SMALL_THRESHOLD) {
+    for (let i = 1; i <= PAGINATION_LEFT_SLICE; i++) pages.push(i);
     pages.push('ellipsis');
     pages.push(total);
-  } else if (current >= total - 3) {
+  } else if (current >= total - PAGINATION_RIGHT_THRESHOLD_OFFSET) {
     pages.push(1);
     pages.push('ellipsis');
-    for (let i = total - 4; i <= total; i++) pages.push(i);
+    for (let i = total - PAGINATION_RIGHT_SLICE; i <= total; i++) pages.push(i);
   } else {
     pages.push(1);
     pages.push('ellipsis');
-    for (let i = current - 1; i <= current + 1; i++) pages.push(i);
+    for (let i = current - PAGINATION_CENTER_RADIUS; i <= current + PAGINATION_CENTER_RADIUS; i++) pages.push(i);
     pages.push('ellipsis');
     pages.push(total);
   }

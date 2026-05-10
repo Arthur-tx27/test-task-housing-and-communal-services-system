@@ -2,6 +2,7 @@ import { types } from 'mobx-state-tree';
 import { MeterModel } from './meter';
 import { fetchMeters, deleteMeter } from '../api/metersApi';
 import type { MeterDTO } from './types';
+import { ERROR_LOAD_METERS, ERROR_DELETE_METER } from '@/shared/constants/api';
 
 export const MetersStore = types
   .model('MetersStore', {
@@ -65,7 +66,7 @@ export const MetersStore = types
         self.setError(
           err instanceof Error
             ? err.message
-            : 'Ошибка загрузки данных'
+            : ERROR_LOAD_METERS
         );
       } finally {
         self.setLoading(false);
@@ -90,7 +91,7 @@ export const MetersStore = types
         self.setError(
           err instanceof Error
             ? err.message
-            : 'Ошибка удаления счётчика'
+            : ERROR_DELETE_METER
         );
       } finally {
         self.setLoading(false);
