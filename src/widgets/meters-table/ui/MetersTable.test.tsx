@@ -28,9 +28,14 @@ function populateStore(store: Instance<typeof RootStore>, count = 20) {
       `area-${j}`,
       AreaModel.create({
         id: `area-${j}`,
-        house: `ул. Ленина, ${j}`,
-        str_number_full: `ул. Ленина, ${j}`,
-        apartment: String(10 + j),
+        number: j,
+        str_number: String(j),
+        str_number_full: `кв. ${j}`,
+        house: {
+          address: `ул. Ленина, ${j}`,
+          id: `house-${j}`,
+          fias_addrobjs: [],
+        },
       })
     );
   }
@@ -75,9 +80,14 @@ describe('MetersTable', () => {
       'area-1',
       AreaModel.create({
         id: 'area-1',
-        house: 'ул. Ленина, 1',
-        str_number_full: 'ул. Ленина, 1',
-        apartment: '11',
+        number: 1,
+        str_number: '1',
+        str_number_full: 'кв. 11',
+        house: {
+          address: 'ул. Ленина, 1',
+          id: 'house-1',
+          fias_addrobjs: [],
+        },
       })
     );
 
@@ -179,9 +189,14 @@ describe('MetersTable', () => {
       'area-77',
       AreaModel.create({
         id: 'area-77',
-        house: 'пр. Мира, 42',
-        str_number_full: 'пр. Мира, 42',
-        apartment: '99',
+        number: 77,
+        str_number: '77',
+        str_number_full: 'кв. 99',
+        house: {
+          address: 'пр. Мира, 42',
+          id: 'house-77',
+          fias_addrobjs: [],
+        },
       })
     );
 

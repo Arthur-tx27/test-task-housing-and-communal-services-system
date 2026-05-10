@@ -18,7 +18,7 @@ import type { AreaDTO } from '@/entities/area/model/types';
 function buildMeterDto(id: string, areaId: string): MeterDTO {
   return {
     id,
-    _type: 'ColdWaterAreaMeter',
+    _type: ['ColdWaterAreaMeter', 'AreaMeter'],
     installation_date: '2024-01-15',
     is_automatic: false,
     initial_values: [100],
@@ -30,9 +30,14 @@ function buildMeterDto(id: string, areaId: string): MeterDTO {
 function buildAreaDto(id: string): AreaDTO {
   return {
     id,
-    house: `ул. Ленина, ${id}`,
-    str_number_full: `ул. Ленина, ${id}`,
-    apartment: '42',
+    number: 1,
+    str_number: '1',
+    str_number_full: 'кв. 42',
+    house: {
+      address: `ул. Ленина, ${id}`,
+      id: `house-${id}`,
+      fias_addrobjs: [],
+    },
   };
 }
 

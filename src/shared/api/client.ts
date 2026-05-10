@@ -13,13 +13,18 @@ export class ApiError extends Error {
 async function request<T>(
   method: string,
   path: string,
-  params?: Record<string, string>
+  params?: Record<string, string | string[]>
 ): Promise<T> {
-  const url = new URL(`${BASE_URL}${path}`);
+  const fullPath = `${BASE_URL}${path}`;
+  const url = new URL(fullPath, location.origin);
 
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
-      url.searchParams.append(key, value);
+      if (Array.isArray(value)) {
+        value.forEach((v) => url.searchParams.append(key, v));
+      } else {
+        url.searchParams.append(key, value);
+      }
     });
   }
 
@@ -32,12 +37,13 @@ async function request<T>(
     );
   }
 
-  return response.json();
+  const text = await response.text();
+  return text ? JSON.parse(text) : (undefined as T);
 }
 
 export async function get<T>(
   path: string,
-  params?: Record<string, string>
+  params?: Record<string, string | string[]>
 ): Promise<T> {
   return request<T>('GET', path, params);
 }

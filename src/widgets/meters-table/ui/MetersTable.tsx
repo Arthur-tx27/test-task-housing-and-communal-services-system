@@ -1,17 +1,18 @@
+import { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useRootStore } from '@/shared/lib/hooks/useRootStore';
 import { DeleteButton } from '@/features/delete-meter/ui/DeleteButton';
+import { Pagination } from '@/features/pagination/ui/Pagination';
 import { Loader } from '@/shared/ui/Loader';
 import { ErrorMessage } from '@/shared/ui/ErrorMessage';
 import { EmptyState } from '@/shared/ui/EmptyState';
 import {
   TableWrapper,
-  FilterBar,
-  FilterLabel,
   ScrollContainer,
-  StyledTable,
-  Thead,
+  StyledThead,
   Th,
+  StyledTable,
+  BottomBar,
   Tr,
   Td,
   TypeCell,
@@ -26,15 +27,17 @@ interface ColumnDef {
 }
 
 const COLUMNS: ColumnDef[] = [
-  { label: '№', width: '60px' },
+  { label: '№', width: '48px' },
   { label: 'Тип', width: '120px' },
-  { label: 'Дата установки', width: '140px' },
-  { label: 'Автоматический', width: '120px' },
-  { label: 'Текущие показания', width: '140px' },
-  { label: 'Адрес', width: '' },
-  { label: 'Примечание', width: '' },
-  { label: '', width: '56px' },
+  { label: 'Дата установки', width: '160px' },
+  { label: 'Автоматический', width: '128px' },
+  { label: 'Текущие показания', width: '146px' },
+  { label: 'Адрес', width: '430px' },
+  { label: 'Примечание', width: '304px' },
+  { label: '', width: '64px' },
 ];
+
+const COL_WIDTH = COLUMNS.map((c) => c.width);
 
 const TYPE_LABELS: Record<string, string> = {
   ColdWaterAreaMeter: 'ХВС',
@@ -52,8 +55,14 @@ function formatDate(dateStr: string): string {
 
 export const MetersTable = observer(function MetersTable() {
   const store = useRootStore();
-  const { meters, offset, isLoading, error } = store.metersStore;
+  const { meters, displayOffset, isLoading, error } = store.metersStore;
   const { areasMap } = store.areasStore;
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo?.({ top: 0, behavior: 'smooth' });
+  }, [displayOffset]);
 
   const showLoader = isLoading && meters.length === 0;
   const showError = error !== null;
@@ -61,22 +70,14 @@ export const MetersTable = observer(function MetersTable() {
 
   return (
     <TableWrapper>
-      <FilterBar>
-        {COLUMNS.map((col) => (
-          <FilterLabel key={col.label} $width={col.width}>
-            {col.label}
-          </FilterLabel>
-        ))}
-      </FilterBar>
-
       {showLoader && <Loader />}
       {showError && <ErrorMessage message={error} />}
       {showEmpty && <EmptyState />}
 
       {!showLoader && !showError && !showEmpty && (
-        <ScrollContainer>
+        <ScrollContainer ref={scrollRef} className="scroll-container">
           <StyledTable>
-            <Thead>
+            <StyledThead>
               <tr>
                 {COLUMNS.map((col) => (
                   <Th key={col.label} $width={col.width}>
@@ -84,36 +85,35 @@ export const MetersTable = observer(function MetersTable() {
                   </Th>
                 ))}
               </tr>
-            </Thead>
+            </StyledThead>
             <tbody>
               {meters.map((meter, index) => {
                 const area = areasMap.get(meter.areaId);
                 const address = area
-                  ? `${area.house}, кв. ${area.apartment}`
+                  ? `${area.house.address}, ${area.str_number_full}`
                   : '';
 
                 return (
-                  <Tr key={meter.id}>
-                    <Td $width="60px">{index + 1 + offset}</Td>
-                    <TypeCell $width="120px">
+                  <Tr key={meter.id} $disabled={isLoading}>
+                    <Td $width={COL_WIDTH[0]}>{index + 1 + displayOffset}</Td>
+                    <TypeCell $width={COL_WIDTH[1]}>
                       <TypeContent>
-                        <TypeIcon
-                          src={TYPE_ICONS[meter._type] ?? ''}
-                          alt=""
-                        />
+                        <TypeIcon src={TYPE_ICONS[meter._type] ?? ''} alt="" />
                         {TYPE_LABELS[meter._type] ?? meter._type}
                       </TypeContent>
                     </TypeCell>
-                    <Td $width="140px">
+                    <Td $width={COL_WIDTH[2]}>
                       {formatDate(meter.installation_date)}
                     </Td>
-                    <Td $width="120px">
+                    <Td $width={COL_WIDTH[3]}>
                       {meter.is_automatic ? 'Да' : 'Нет'}
                     </Td>
-                    <Td $width="140px">{meter.initial_values[0]}</Td>
-                    <Td>{address}</Td>
-                    <Td>{meter.description}</Td>
-                    <ActionsCell $width="56px">
+                    <Td $width={COL_WIDTH[4]}>{meter.initial_values[0]}</Td>
+                    <Td $width={COL_WIDTH[5]}>{address}</Td>
+                    <Td $width={COL_WIDTH[6]} $muted>
+                      {meter.description}
+                    </Td>
+                    <ActionsCell $width={COL_WIDTH[7]}>
                       <DeleteButton meterId={meter.id} />
                     </ActionsCell>
                   </Tr>
@@ -123,6 +123,10 @@ export const MetersTable = observer(function MetersTable() {
           </StyledTable>
         </ScrollContainer>
       )}
+
+      <BottomBar>
+        <Pagination />
+      </BottomBar>
     </TableWrapper>
   );
 });

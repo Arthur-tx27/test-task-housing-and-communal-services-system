@@ -9,9 +9,9 @@ import { fetchMeters, deleteMeter } from '../api/metersApi';
 
 interface MeterApiItem {
   id: string;
-  _type: string;
+  _type: string[];
   installation_date: string;
-  is_automatic: boolean;
+  is_automatic: boolean | null;
   initial_values: number[];
   description: string;
   area: { id: string };
@@ -20,7 +20,7 @@ interface MeterApiItem {
 function buildMetersDto(count: number, offset = 0): MeterApiItem[] {
   return Array.from({ length: count }, (_, i) => ({
     id: String(offset + i + 1),
-    _type: i % 2 === 0 ? 'ColdWaterAreaMeter' : 'HotWaterAreaMeter',
+    _type: i % 2 === 0 ? ['ColdWaterAreaMeter', 'AreaMeter'] : ['HotWaterAreaMeter', 'AreaMeter'],
     installation_date: `2024-01-${String(i + 1).padStart(2, '0')}`,
     is_automatic: i % 3 === 0,
     initial_values: [100 + i],
@@ -95,7 +95,7 @@ describe('MetersStore', () => {
           results: [
             {
               id: '21',
-              _type: 'ColdWaterAreaMeter',
+              _type: ['ColdWaterAreaMeter', 'AreaMeter'],
               installation_date: '2024-01-21',
               is_automatic: false,
               initial_values: [120],
@@ -114,6 +114,7 @@ describe('MetersStore', () => {
       await store.removeMeter('1');
 
       expect(deleteMeter).toHaveBeenCalledWith('1');
+      expect(fetchMeters).toHaveBeenCalledWith(1, 19);
       expect(store.meters.length).toBe(20);
       expect(store.meters.find((m) => m.id === '1')).toBeUndefined();
       expect(store.meters.find((m) => m.id === '21')).toBeDefined();

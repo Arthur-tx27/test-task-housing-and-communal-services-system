@@ -1,6 +1,6 @@
 import { types } from 'mobx-state-tree';
-import { runInAction } from 'mobx';
 import { AreaModel } from './area';
+import type { AreaDTO } from './types';
 import { fetchAreasByIds } from '../api/areasApi';
 
 export const AreasStore = types
@@ -10,31 +10,37 @@ export const AreasStore = types
     error: types.maybeNull(types.string),
   })
   .actions((self) => ({
+    setLoading(v: boolean) {
+      self.isLoading = v;
+    },
+    setError(e: string | null) {
+      self.error = e;
+    },
+    setAreas(areas: AreaDTO[]) {
+      areas.forEach((area) => {
+        self.areasMap.set(area.id, AreaModel.create(area));
+      });
+    },
+  }))
+  .actions((self) => ({
     async fetchAreas(ids: string[]) {
       if (ids.length === 0) return;
 
       const unknownIds = ids.filter((id) => !self.areasMap.has(id));
       if (unknownIds.length === 0) return;
 
-      self.isLoading = true;
-      self.error = null;
+      self.setLoading(true);
+      self.setError(null);
 
       try {
         const areas = await fetchAreasByIds(unknownIds);
-        runInAction(() => {
-          areas.forEach(({ id, house, str_number_full, apartment }) => {
-            self.areasMap.set(id, AreaModel.create({ id, house, str_number_full, apartment }));
-          });
-        });
+        self.setAreas(areas);
       } catch (err) {
-        runInAction(() => {
-          self.error =
-            err instanceof Error ? err.message : 'Ошибка загрузки адресов';
-        });
+        self.setError(
+          err instanceof Error ? err.message : 'Ошибка загрузки адресов'
+        );
       } finally {
-        runInAction(() => {
-          self.isLoading = false;
-        });
+        self.setLoading(false);
       }
     },
 

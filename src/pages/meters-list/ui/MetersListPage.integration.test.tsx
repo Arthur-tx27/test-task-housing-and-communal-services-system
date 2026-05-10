@@ -44,18 +44,28 @@ describe('Интеграционный тест', () => {
       'a1',
       AreaModel.create({
         id: 'a1',
-        house: 'пр. Ленина, 1',
-        str_number_full: 'пр. Ленина, 1',
-        apartment: '10',
+        number: 1,
+        str_number: '1',
+        str_number_full: 'кв. 10',
+        house: {
+          address: 'пр. Ленина, 1',
+          id: 'house-a1',
+          fias_addrobjs: [],
+        },
       })
     );
     store.areasStore.areasMap.set(
       'a2',
       AreaModel.create({
         id: 'a2',
-        house: 'пр. Ленина, 2',
-        str_number_full: 'пр. Ленина, 2',
-        apartment: '20',
+        number: 2,
+        str_number: '2',
+        str_number_full: 'кв. 20',
+        house: {
+          address: 'пр. Ленина, 2',
+          id: 'house-a2',
+          fias_addrobjs: [],
+        },
       })
     );
 
