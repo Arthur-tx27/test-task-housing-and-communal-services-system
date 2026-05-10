@@ -6,6 +6,7 @@ import { Loader } from '@/shared/ui/Loader';
 import { ErrorMessage } from '@/shared/ui/ErrorMessage';
 import { EmptyState } from '@/shared/ui/EmptyState';
 import { COLUMNS, COL_WIDTH } from '@/shared/constants/meterTypes';
+import { SCROLL_CONTAINER_CLASS } from '@/shared/constants/cssClasses';
 import {
   TableWrapper,
   ScrollContainer,
@@ -32,7 +33,7 @@ export const MetersTable = observer(function MetersTable() {
       {showEmpty && <EmptyState />}
 
       {!showLoader && !showError && !showEmpty && (
-        <ScrollContainer ref={scrollRef} className="scroll-container">
+        <ScrollContainer ref={scrollRef} className={SCROLL_CONTAINER_CLASS}>
           <StyledTable>
             <StyledThead>
               <tr>

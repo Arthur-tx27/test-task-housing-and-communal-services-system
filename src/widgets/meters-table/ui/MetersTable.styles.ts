@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { DELETE_BUTTON_CLASS } from '@/shared/constants/cssClasses';
 
 export const TableWrapper = styled.div`
   display: flex;
@@ -64,7 +65,7 @@ export const Tr = styled.tr<{ $disabled?: boolean }>`
     background: ${({ theme }) => theme.colors.surfaceAlt};
   }
 
-  &:hover .delete-button {
+  &:hover .${DELETE_BUTTON_CLASS} {
     opacity: 1;
     visibility: visible;
   }
