@@ -5,7 +5,6 @@ jest.mock('@/entities/meter/api/metersApi', () => ({
 
 jest.mock('@/entities/area/api/areasApi', () => ({
   fetchAreasByIds: jest.fn(),
-  clearCache: jest.fn(),
 }));
 
 import { unprotect } from 'mobx-state-tree';
