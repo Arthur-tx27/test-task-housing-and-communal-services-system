@@ -23,9 +23,14 @@ describe('Снапшот-тесты', () => {
       'a1',
       AreaModel.create({
         id: 'a1',
-        house: 'ул. Мира, 5',
-        str_number_full: 'ул. Мира, 5',
-        apartment: '12',
+        number: 1,
+        str_number: '1',
+        str_number_full: 'кв. 12',
+        house: {
+          address: 'ул. Мира, 5',
+          id: 'house-a1',
+          fias_addrobjs: [],
+        },
       })
     );
 
@@ -50,9 +55,14 @@ describe('Снапшот-тесты', () => {
       'a1',
       AreaModel.create({
         id: 'a1',
-        house: 'ул. Тестовая, 1',
-        str_number_full: 'ул. Тестовая, 1',
-        apartment: '1',
+        number: 1,
+        str_number: '1',
+        str_number_full: 'кв. 1',
+        house: {
+          address: 'ул. Тестовая, 1',
+          id: 'house-a1',
+          fias_addrobjs: [],
+        },
       })
     );
     store.metersStore.totalCount = 1;

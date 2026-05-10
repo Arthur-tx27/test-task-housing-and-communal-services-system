@@ -3,166 +3,122 @@
 exports[`Снапшот-тесты снапшот MetersListPage с мок-стором 1`] = `
 <DocumentFragment>
   <div
-    class="sc-fKFxPF bkRtYU"
+    class="sc-bBXraC dDerTG"
   >
     <h1
-      class="sc-bBXraC flcVrg"
+      class="sc-iwyYQf ZsRUe"
     >
       Список счётчиков
     </h1>
     <div
-      class="sc-jrAIFA hgZOzc"
+      class="sc-bqyIgP kkQIEe"
     >
       <div
-        class="sc-kEjckD gJHGys"
-      >
-        <span
-          class="sc-iqHZue ivkOdp"
-        >
-          №
-        </span>
-        <span
-          class="sc-iqHZue cgBSYw"
-        >
-          Тип
-        </span>
-        <span
-          class="sc-iqHZue dtZney"
-        >
-          Дата установки
-        </span>
-        <span
-          class="sc-iqHZue cgBSYw"
-        >
-          Автоматический
-        </span>
-        <span
-          class="sc-iqHZue dtZney"
-        >
-          Текущие показания
-        </span>
-        <span
-          class="sc-iqHZue YXEYj"
-        >
-          Адрес
-        </span>
-        <span
-          class="sc-iqHZue YXEYj"
-        >
-          Примечание
-        </span>
-        <span
-          class="sc-iqHZue hCYHBI"
-        />
-      </div>
-      <div
-        class="sc-crrrsl cRBBMB"
+        class="sc-kstoPm ggfSXl scroll-container"
       >
         <table
-          class="sc-dQoBM likOJx"
+          class="sc-fFubTW XkpcA"
         >
           <thead
-            class="sc-bqyIgP JUPDU"
+            class="sc-hBFaCF hPziSu"
           >
             <tr>
               <th
-                class="sc-kstoPm inXOvH"
+                class="sc-fodXMg lifdOI"
               >
                 №
               </th>
               <th
-                class="sc-kstoPm gzBGKa"
+                class="sc-fodXMg brSFxr"
               >
                 Тип
               </th>
               <th
-                class="sc-kstoPm kSqME"
+                class="sc-fodXMg kfkOdn"
               >
                 Дата установки
               </th>
               <th
-                class="sc-kstoPm gzBGKa"
+                class="sc-fodXMg knA-doD"
               >
                 Автоматический
               </th>
               <th
-                class="sc-kstoPm kSqME"
+                class="sc-fodXMg cxZTUf"
               >
                 Текущие показания
               </th>
               <th
-                class="sc-kstoPm mqvhO"
+                class="sc-fodXMg lkqhCP"
               >
                 Адрес
               </th>
               <th
-                class="sc-kstoPm mqvhO"
+                class="sc-fodXMg frChAX"
               >
                 Примечание
               </th>
               <th
-                class="sc-kstoPm kpHyky"
+                class="sc-fodXMg bPJjym"
               />
             </tr>
           </thead>
           <tbody>
             <tr
-              class="sc-hBFaCF gsRsap"
+              class="sc-idOkdQ jhPbqV"
             >
               <td
-                class="sc-fodXMg iHcXEw"
+                class="sc-dIUiux gKhmWl"
               >
                 1
               </td>
               <td
-                class="sc-fodXMg sc-fFubTW CZgDN"
+                class="sc-dIUiux sc-hHfrpe eHPaTq"
               >
                 <span
-                  class="sc-bkAakD LcpJI"
+                  class="sc-dmlpFL gLwuJB"
                 >
                   <img
                     alt=""
-                    class="sc-idOkdQ ytrFK"
+                    class="sc-kfzzyY kkxPaH"
                     src="/icons/hvs.svg"
                   />
                   ХВС
                 </span>
               </td>
               <td
-                class="sc-fodXMg eLxrJb"
+                class="sc-dIUiux hQNhqa"
               >
                 01.01.2024
               </td>
               <td
-                class="sc-fodXMg CZgDN"
+                class="sc-dIUiux hbDmBa"
               >
                 Нет
               </td>
               <td
-                class="sc-fodXMg eLxrJb"
+                class="sc-dIUiux cDsJIC"
               >
                 0
               </td>
               <td
-                class="sc-fodXMg cIvHYh"
+                class="sc-dIUiux jDegZu"
               >
                 ул. Тестовая, 1, кв. 1
               </td>
               <td
-                class="sc-fodXMg cIvHYh"
+                class="sc-dIUiux fRiYSH"
               />
               <td
-                class="sc-fodXMg sc-dIUiux bmZhiR hZhlXw"
+                class="sc-dIUiux sc-fKFxPF bquyL gHbYAW"
               >
                 <button
-                  class="sc-bdfDLd fZIEJZ delete-button"
+                  class="sc-bdfDLd iopmhw delete-button"
                   disabled=""
                   type="button"
                 >
-                  <img
-                    alt="Удалить"
-                    class="sc-gsTDHW hJCXVh"
-                    src="/icons/trash.svg"
+                  <span
+                    class="sc-gsTDHW jzTWcK"
                   />
                 </button>
               </td>
@@ -170,6 +126,9 @@ exports[`Снапшот-тесты снапшот MetersListPage с мок-ст�
           </tbody>
         </table>
       </div>
+      <div
+        class="sc-bkAakD jIIeon"
+      />
     </div>
   </div>
 </DocumentFragment>
@@ -178,157 +137,113 @@ exports[`Снапшот-тесты снапшот MetersListPage с мок-ст�
 exports[`Снапшот-тесты снапшот MetersTable с тестовыми данными 1`] = `
 <DocumentFragment>
   <div
-    class="sc-jrAIFA hgZOzc"
+    class="sc-bqyIgP kkQIEe"
   >
     <div
-      class="sc-kEjckD gJHGys"
-    >
-      <span
-        class="sc-iqHZue ivkOdp"
-      >
-        №
-      </span>
-      <span
-        class="sc-iqHZue cgBSYw"
-      >
-        Тип
-      </span>
-      <span
-        class="sc-iqHZue dtZney"
-      >
-        Дата установки
-      </span>
-      <span
-        class="sc-iqHZue cgBSYw"
-      >
-        Автоматический
-      </span>
-      <span
-        class="sc-iqHZue dtZney"
-      >
-        Текущие показания
-      </span>
-      <span
-        class="sc-iqHZue YXEYj"
-      >
-        Адрес
-      </span>
-      <span
-        class="sc-iqHZue YXEYj"
-      >
-        Примечание
-      </span>
-      <span
-        class="sc-iqHZue hCYHBI"
-      />
-    </div>
-    <div
-      class="sc-crrrsl cRBBMB"
+      class="sc-kstoPm ggfSXl scroll-container"
     >
       <table
-        class="sc-dQoBM likOJx"
+        class="sc-fFubTW XkpcA"
       >
         <thead
-          class="sc-bqyIgP JUPDU"
+          class="sc-hBFaCF hPziSu"
         >
           <tr>
             <th
-              class="sc-kstoPm inXOvH"
+              class="sc-fodXMg lifdOI"
             >
               №
             </th>
             <th
-              class="sc-kstoPm gzBGKa"
+              class="sc-fodXMg brSFxr"
             >
               Тип
             </th>
             <th
-              class="sc-kstoPm kSqME"
+              class="sc-fodXMg kfkOdn"
             >
               Дата установки
             </th>
             <th
-              class="sc-kstoPm gzBGKa"
+              class="sc-fodXMg knA-doD"
             >
               Автоматический
             </th>
             <th
-              class="sc-kstoPm kSqME"
+              class="sc-fodXMg cxZTUf"
             >
               Текущие показания
             </th>
             <th
-              class="sc-kstoPm mqvhO"
+              class="sc-fodXMg lkqhCP"
             >
               Адрес
             </th>
             <th
-              class="sc-kstoPm mqvhO"
+              class="sc-fodXMg frChAX"
             >
               Примечание
             </th>
             <th
-              class="sc-kstoPm kpHyky"
+              class="sc-fodXMg bPJjym"
             />
           </tr>
         </thead>
         <tbody>
           <tr
-            class="sc-hBFaCF gsRsap"
+            class="sc-idOkdQ dTwZGA"
           >
             <td
-              class="sc-fodXMg iHcXEw"
+              class="sc-dIUiux gKhmWl"
             >
               1
             </td>
             <td
-              class="sc-fodXMg sc-fFubTW CZgDN"
+              class="sc-dIUiux sc-hHfrpe eHPaTq"
             >
               <span
-                class="sc-bkAakD LcpJI"
+                class="sc-dmlpFL gLwuJB"
               >
                 <img
                   alt=""
-                  class="sc-idOkdQ ytrFK"
+                  class="sc-kfzzyY kkxPaH"
                   src="/icons/hvs.svg"
                 />
                 ХВС
               </span>
             </td>
             <td
-              class="sc-fodXMg eLxrJb"
+              class="sc-dIUiux hQNhqa"
             >
               10.05.2024
             </td>
             <td
-              class="sc-fodXMg CZgDN"
+              class="sc-dIUiux hbDmBa"
             >
               Да
             </td>
             <td
-              class="sc-fodXMg eLxrJb"
+              class="sc-dIUiux cDsJIC"
             >
               100
             </td>
             <td
-              class="sc-fodXMg cIvHYh"
+              class="sc-dIUiux jDegZu"
             >
               ул. Мира, 5, кв. 12
             </td>
             <td
-              class="sc-fodXMg cIvHYh"
+              class="sc-dIUiux fRiYSH"
             />
             <td
-              class="sc-fodXMg sc-dIUiux bmZhiR hZhlXw"
+              class="sc-dIUiux sc-fKFxPF bquyL gHbYAW"
             >
               <button
-                class="sc-bdfDLd fZIEJZ delete-button"
+                class="sc-bdfDLd iopmhw delete-button"
                 type="button"
               >
-                <img
-                  alt="Удалить"
-                  class="sc-gsTDHW hJCXVh"
-                  src="/icons/trash.svg"
+                <span
+                  class="sc-gsTDHW jzTWcK"
                 />
               </button>
             </td>
@@ -336,6 +251,9 @@ exports[`Снапшот-тесты снапшот MetersTable с тестовы�
         </tbody>
       </table>
     </div>
+    <div
+      class="sc-bkAakD jIIeon"
+    />
   </div>
 </DocumentFragment>
 `;
