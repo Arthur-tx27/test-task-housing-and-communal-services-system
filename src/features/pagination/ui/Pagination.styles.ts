@@ -32,23 +32,6 @@ export const PageButton = styled.button<{ $active?: boolean }>`
   }
 `;
 
-export const EllipsisButton = styled.button`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 32px;
-  height: 32px;
-  font-size: ${({ theme }) => theme.fonts.sizeSm};
-  color: ${({ theme }) => theme.colors.textMuted};
-  cursor: pointer;
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.surfaceAlt};
-    color: ${({ theme }) => theme.colors.textPrimary};
-  }
-`;
-
 export const DropdownPopup = styled.div`
   position: fixed;
   display: grid;

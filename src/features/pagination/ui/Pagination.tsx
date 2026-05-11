@@ -3,7 +3,6 @@ import { usePagination } from '../model/usePagination';
 import {
   PaginationContainer,
   PageButton,
-  EllipsisButton,
   DropdownPopup,
   DropdownBackdrop,
 } from './Pagination.styles';
@@ -27,13 +26,14 @@ export const Pagination = observer(function Pagination() {
     <PaginationContainer>
       {pageNumbers.map((item, index) =>
         item === 'ellipsis' ? (
-          <EllipsisButton
+          <PageButton
             key={`ellipsis-${index}`}
             type="button"
+            $active={index === openEllipsis?.index}
             onClick={(e) => handleEllipsisClick(e, index)}
           >
             ...
-          </EllipsisButton>
+          </PageButton>
         ) : (
           <PageButton
             key={item}
