@@ -1,0 +1,8 @@
+export const PAGE_SIZE = 20;
+
+export const PAGINATION_MAX_VISIBLE = 7;
+export const PAGINATION_LEFT_SLICE = 5;
+export const PAGINATION_RIGHT_SLICE = 4;
+export const PAGINATION_CENTER_RADIUS = 1;
+export const PAGINATION_SMALL_THRESHOLD = 4;
+export const PAGINATION_RIGHT_THRESHOLD_OFFSET = 3;
