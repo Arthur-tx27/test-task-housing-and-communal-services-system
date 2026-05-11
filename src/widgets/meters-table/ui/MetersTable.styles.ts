@@ -75,7 +75,6 @@ export const Tr = styled.tr<{ $disabled?: boolean }>`
     css`
       color: ${theme.colors.textDisabled};
       cursor: default;
-      pointer-events: none;
 
       ${Td}, ${TypeCell}, ${TypeContent}, ${ActionsCell} {
         color: ${theme.colors.textDisabled};
